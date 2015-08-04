@@ -24,14 +24,14 @@ Configuration
 =============
 There is a `config.json` file which holds most system configurations.
 * debug: Flask `debug`. Useful for debug and development.
-* host: Flask's `SERVER_NAME`. It's required if you want to use it as a static site builder. (To create URLS)
+* host: Flask's `SERVER_NAME`. It's required if you want to use it as a static site builder. (To create URLs)
 * title: Blog title.
 * description: Blog description.
 * author: Blog author.
 * social: Twitter, Facebook and Github usernames of author. Used in the footer of the blog.
 * post: Posts configurations and options:
-..* excerpt_length: Number of posts excerpt words. (short part of the post)
-..* words_count: Show posts words count in the blog.
+ * excerpt_length: Number of posts excerpt words. (short part of the post)
+ * words_count: Show posts words count in the blog.
 
 
 Todo
