@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block body %}
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% for post in posts %}
+                    <div class="post-preview">
+                        <a href="{{ url_for('show_post', post_name=post.name) }}">
+                            <h2 class="post-title">
+                                {{ post.title | capitalize }}
+                            </h2>
+                            <h3 class="post-subtitle">
+                                {{ post.content | striptags | truncate(config.blog.post.excerpt_length) }}
+                            </h3>
+                        </a>
+                        {% if config.blog.post.words_count %}
+                            <p class="post-meta">Posted in <a>{{ post.content | striptags | wordcount }}</a> words by <a href="{{ url_for('show_post', post_name='hello') }}">{{ post.author }}</a> on <a>{{ post.meta.date[0] }}</a></p>
+                        {% else %}
+                            <p class="post-meta">Posted by <a href="{{ url_for('show_post', post_name='hello') }}">{{ post.author }}</a> on <a>{{ post.meta.date[0] }}</a></p>
+                        {% endif %}
+                    </div>
+                    <hr>
+                {% endfor %}
+                <!-- Pager -->
+                <!-- <ul class="pager">
+                    <li class="next">
+                        <a href="#">Older Posts &rarr;</a>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+    </div>
+
+    <hr>
+{% endblock %}

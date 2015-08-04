@@ -1,0 +1,102 @@
+#!/usr/bin/python3
+import sys
+import distutils.dir_util
+import blog
+import helpers
+from flask import render_template
+
+
+def clear_screen():
+    sys.stdout.write('\033c')
+
+
+def build_post(post):
+    file = helpers.get_application_dir('dist/%s.html' % post['name'])
+    try:
+        with blog.app.app_context():
+            f = open(file, 'w')
+            f.write(render_template('post.html', **post))
+            f.close()
+    except IOError:
+        pass
+
+    return '"%s" post built!' % post['name']
+
+
+def build_pages():
+    posts = helpers.get_posts()
+    file = helpers.get_application_dir('dist', 'index.html')
+    try:
+        with blog.app.app_context():
+            f = open(file, 'w')
+            f.write(render_template('index.html', posts=posts))
+    except IOError:
+        pass
+    return 'Index page built!'
+
+
+def copy_static_dir():
+    distutils.dir_util.copy_tree(helpers.get_application_dir('static'), helpers.get_application_dir('dist', 'static'))
+    return "Static directory copied to dist!"
+
+
+def read_params():
+    return sys.argv[1:]
+
+
+def build():
+    posts = helpers.get_posts()
+    print("\nBuilding %s posts..." % len(posts))
+    print("--------------------")
+    for post in posts:
+        print(build_post(post))
+
+    print("--------------------\n")
+
+    print("Copying static files...")
+    print("--------------------")
+    print(copy_static_dir())
+    print("--------------------\n")
+
+    print("Building pages...")
+    print("--------------------")
+    print(build_pages())
+    print("--------------------")
+
+
+def show_help():
+    print('''usage: ./runner [options]
+options:
+  build           build the static files and put them in dist directory
+  serve           serve the blog as an app (With Flask)
+  help            show help''')
+
+
+def serve_blog():
+    blog.app.run()
+
+
+
+params = read_params()
+
+try:
+    action = params[0]
+except IndexError:
+    action = '--help'
+
+actions_list = {
+    'build': build,
+    'dist': build,
+    '--build': build,
+    '--dist': build,
+    'help': show_help,
+    '--help': show_help,
+    'serve': serve_blog,
+    '--serve': serve_blog
+}
+
+try:
+    actions_list[action]()
+except KeyError:
+    print('''No such command found.
+Try ./runner help or ./runner --help to get some help.''')

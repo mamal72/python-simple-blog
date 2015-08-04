@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+    {% include 'nav.html' %}
+    <header class="intro-header" style="background-image: url({{ url_for('static', filename='img/home-bg.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>{{ title | capitalize }}</h1>
+                        {#<h2 class="subheading">{{ content | striptags | truncate(50) }}</h2>#}
+                        {% if config.blog.post.words_count %}
+                            <span class="meta">Posted in <a>{{ content | striptags | wordcount }}</a> words by <a href="{{ url_for('show_post', post_name='hello') }}">{{ author }}</a> on <a>{{ meta.date[0] }}</a></span>
+                        {% else %}
+                            <span class="meta">Posted by <a href="{{ url_for('show_post', post_name='hello') }}">{{ author }}</a> on <a>{{ meta.date[0] }}</a></span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body %}
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    {{ content | safe }}
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock %}

@@ -1,0 +1,16 @@
+{
+  "debug": true,
+  "host": "localhost:8080",
+  "title": "John Does a lot!",
+  "description": "My personal blog",
+  "author": "John Doe",
+  "social": {
+    "twitter": "mamal72",
+    "facebook": "mamal72",
+    "github": "mamal72"
+  },
+  "post": {
+    "excerpt_length": 100,
+    "words_count": false
+  }
+}
