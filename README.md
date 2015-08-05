@@ -7,7 +7,7 @@ This is a WIP and may get some changes. Use it on your own risk!
 Installation steps
 ==================
 1. Clone the repository: `git clone https://github.com/mamal72/python-simple-blog`
-2. Install dependencies: `[sudo] pip install flask markdown`
+2. Install dependencies: `[sudo] pip install flask markdown jinja2`
 3. Serve the blog: `./runner serve`
 
 You can check the `posts` directory to find out how you should write your posts.
@@ -41,6 +41,7 @@ Todo
 - [ ] Find a good solution for contact form that works in static mode too
 - [ ] Pagination
 - [ ] Add some date parsing library
+- [ ] Find a better name for project!
 - [ ] YOUR AWESOME IDEAS! [Fill an issue](https://github.com/mamal72/python-simple-blog/issues)
 
 
